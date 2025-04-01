@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ημερολόγιο Σημειώσεων</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        #calendar { margin: 20px auto; width: 300px; }
+        textarea { width: 100%; height: 100px; margin-top: 10px; }
+        button { margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Ημερολόγιο Σημειώσεων</h2>
+    <label for="date">Επιλέξτε ημερομηνία:</label>
+    <input type="date" id="date" onchange="loadNotes()">
+    <div id="calendar">
+        <textarea id="notes" placeholder="Σημειώσεις..."></textarea>
+        <br>
+        <button onclick="saveNotes()">Αποθήκευση</button>
+        <button onclick="clearNotes()">Διαγραφή</button>
+    </div>
+
+    <script>
+        function loadNotes() {
+            let date = document.getElementById("date").value;
+            document.getElementById("notes").value = localStorage.getItem(date) || "";
+        }
+
+        function saveNotes() {
+            let date = document.getElementById("date").value;
+            let notes = document.getElementById("notes").value;
+            localStorage.setItem(date, notes);
+            alert("Οι σημειώσεις αποθηκεύτηκαν!");
+        }
+
+        function clearNotes() {
+            let date = document.getElementById("date").value;
+            localStorage.removeItem(date);
+            document.getElementById("notes").value = "";
+            alert("Οι σημειώσεις διαγράφηκαν!");
+        }
+    </script>
+</body>
+</html>
